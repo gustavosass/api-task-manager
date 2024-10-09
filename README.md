@@ -7,10 +7,10 @@ classDiagram
         +String name
         +String email
         +String password
-        +createTask(task: Task): void
-        +updateTask(task: Task): void
-        +deleteTask(taskId: int): void
-        +getTasks(): List~Task~
+         +createUser(user: User): void
+        +updateUser(user: User): void
+        +deleteUser(userId: int): void
+        +getUsers(): List~User~
     }
 
     class Task {
@@ -22,6 +22,10 @@ classDiagram
         +Status status
         +Category category
         +List~User~ user
+         +createTask(task: Task): void
+        +updateTask(task: Task): void
+        +deleteTask(taskId: int): void
+        +getTasks(): List~Task~
         +markAsCompleted(): void
         +updateStatus(newStatus: Status): void
         +changePriority(newPriority: Priority): void
@@ -30,10 +34,10 @@ classDiagram
     class Category {
         +int id
         +String name
-        +List~Task~ tasks
-        +addTask(task: Task): void
-        +removeTask(task: Task): void
-        +getTasks(): List~Task~
+        +createCategory(category: Category): void
+        +updateCategory(category: Category): void
+        +deleteCategory(categoryId: int): void
+        +getCategory(): List~Category~
     }
 
     class Priority {
