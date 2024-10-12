@@ -33,31 +33,36 @@ public class UserController {
 	
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll(){
-		return ResponseEntity.ok(userServiceImpl.findAll().stream().map(userMapper::toDto).collect(Collectors.toList()));
+		List<UserDTO> listUserDto = userServiceImpl.findAll().stream().map(userMapper::toDto).collect(Collectors.toList());
+		return ResponseEntity.ok(listUserDto);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDTO> findById(@PathVariable Long id){
-		return ResponseEntity.ok(userMapper.toDto(userServiceImpl.findById(id)));
+		UserDTO userDto = userMapper.toDto(userServiceImpl.findById(id));
+		return ResponseEntity.ok(userDto);
 	}
 	
 	@GetMapping("/document/{document}")
 	public ResponseEntity<UserDTO> findByDocument(@PathVariable Long document){
-		return ResponseEntity.ok(userMapper.toDto(userServiceImpl.findByDocument(document)));
+		UserDTO userDto = userMapper.toDto(userServiceImpl.findByDocument(document));
+		return ResponseEntity.ok(userDto);
 	}
 	
 	@PostMapping
 	public ResponseEntity<UserDTO> create(@RequestBody UserCreateDTO userCreateDTO){
 		User user = userMapper.toUser(userCreateDTO);
 		User userCreated = userServiceImpl.create(user);
-		return ResponseEntity.ok(userMapper.toDto(userCreated));
+		UserDTO userDto = userMapper.toDto(userCreated);
+		return ResponseEntity.ok(userDto);
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDto){
 		User user = userMapper.toUser(userDto);
 		User userUpdated = userServiceImpl.update(id, user);
-		return ResponseEntity.ok(userMapper.toDto(userUpdated));
+		UserDTO updatedUserDto = userMapper.toDto(userUpdated);
+		return ResponseEntity.ok(updatedUserDto);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -68,6 +73,7 @@ public class UserController {
 	
 	@PutMapping("/{id}/password")
 	public ResponseEntity<UserDTO> updatePassword(@PathVariable Long id, @RequestBody UpdatePasswordDTO updatePasswordDto){
-		return ResponseEntity.ok(userMapper.toDto(userServiceImpl.updatePassword(id, updatePasswordDto)));
+		UserDTO userDto = userMapper.toDto(userServiceImpl.updatePassword(id, updatePasswordDto));
+		return ResponseEntity.ok(userDto);
 	}
 }

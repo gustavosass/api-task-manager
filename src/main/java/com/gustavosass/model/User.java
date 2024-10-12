@@ -18,9 +18,8 @@ public class User {
 	private String mail;
 	private String password;
 	
-	public User() {
-		
-	}
+	public User() {}
+	
 	public User(String name, Long document, String mail, String password) {
 		this.name = name;
 		this.document = document;

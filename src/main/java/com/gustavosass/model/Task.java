@@ -22,6 +22,23 @@ public class Task {
 	@ManyToMany(cascade = CascadeType.DETACH)
 	private Set<User> users;
 	
+	public Task() {}
+
+	public Task(String title, String description, Date dueDate, Set<User> users) {
+		this.title = title;
+		this.description = description;
+		this.dueDate = dueDate;
+		this.users = users;
+	}
+	
+	public Task(Long id, String title, String description, Date dueDate, Set<User> users) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.dueDate = dueDate;
+		this.users = users;
+	}
+	
 	public Long getId() {
 		return id;
 	}
