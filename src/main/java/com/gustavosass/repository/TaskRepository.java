@@ -13,5 +13,5 @@ import com.gustavosass.model.Task;
 public interface TaskRepository extends JpaRepository<Task, Long> {
 	
 	@Query("SELECT t FROM tb_task t JOIN t.users u WHERE u.id = :id")
-	List<Task> findAllTaskByUserId(@Param("id") Long id);
+	List<Task> findTasksByUserId(@Param("id") Long id);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.gustavosass.dto.UpdatePasswordDTO;
 import com.gustavosass.model.User;
 
 @Service
@@ -20,6 +21,8 @@ public interface UserService {
 	User create(User user);
 	
 	User update(Long id, User user);
+	
+	User updatePassword(Long id, UpdatePasswordDTO updatePasswordDto);
 	
 	void delete(Long id);
 }

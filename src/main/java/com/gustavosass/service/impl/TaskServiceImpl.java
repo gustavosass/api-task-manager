@@ -20,10 +20,6 @@ public class TaskServiceImpl implements TaskService {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 	
-	@Override
-	public List<Task> findAllTaskByUserId(Long id) {
-		return taskRepository.findAllTaskByUserId(id);
-	}
 
 	@Override
 	public List<Task> findAll() {
@@ -33,6 +29,11 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Task findById(Long id) {
 		return taskRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+	}
+	
+	@Override
+	public List<Task> findTasksByUserId(Long id) {
+		return taskRepository.findTasksByUserId(id);
 	}
 
 	@Override

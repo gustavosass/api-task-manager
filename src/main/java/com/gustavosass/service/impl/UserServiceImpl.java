@@ -6,10 +6,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import com.gustavosass.dto.UpdatePasswordDTO;
 import com.gustavosass.model.User;
 import com.gustavosass.repository.UserRepository;
 import com.gustavosass.service.UserService;
@@ -55,6 +57,7 @@ public class UserServiceImpl implements UserService {
 	public User update(Long id, User user) {
 		Optional<User> userExists = userRepository.findById(id);
 		if(userExists.isPresent()) {
+			user.setPassword(userExists.get().getPassword());
 			return userRepository.save(user);
 		}
 		throw new HttpClientErrorException(HttpStatus.NOT_MODIFIED, "Erro ao atualizar usuário.");
@@ -66,10 +69,22 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteById(id);
 	}
 	
+	@Override
+	public User updatePassword(Long id, UpdatePasswordDTO updatePasswordDto) {
+		User user = userRepository.findById(id).orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_MODIFIED, "Erro ao atualizar usuário."));
+		if(user.getPassword().equals(updatePasswordDto.getPassword())){
+			user.setPassword(updatePasswordDto.getNewPassword());
+			return userRepository.save(user);
+		}
+		throw new HttpClientErrorException(HttpStatus.NOT_MODIFIED, "Senha atual incorreta.");
+	}
+	
 	public boolean existsUsersById(List<Long> ids) {
 		List<Long> usersFound = this.findAllByIds(ids).stream().map(n -> n.getId()).collect(Collectors.toList());
 		return usersFound.containsAll(ids);
 	}
+
+	
 	
 
 }

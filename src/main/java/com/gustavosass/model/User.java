@@ -10,16 +10,33 @@ import jakarta.persistence.Id;
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String firstName;
-	private String lastName;
+	private String name;
 	@Column(unique = true, nullable = false)
 	private Long document;
 	private String mail;
+	private String password;
 	
-	public String getFirstName() {
-		return this.firstName;
+	public User() {
+		
+	}
+	public User(String name, Long document, String mail, String password) {
+		this.name = name;
+		this.document = document;
+		this.mail = mail;
+		this.password = password;
+	}
+	
+	public User(long id, String name, Long document, String mail) {
+		this.id = id;
+		this.name = name;
+		this.document = document;
+		this.mail = mail;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	public Long getDocument() {
@@ -30,8 +47,8 @@ public class User {
 		this.document = document;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Long getId() {
@@ -42,14 +59,6 @@ public class User {
 		this.id = id;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	public String getMail() {
 		return mail;
 	}
@@ -58,6 +67,11 @@ public class User {
 		this.mail = mail;
 	}
 	
-	
-	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

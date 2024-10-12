@@ -14,12 +14,12 @@ import jakarta.persistence.ManyToMany;
 public class Task {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
 	private String description;
 	private Date dueDate;
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.DETACH)
 	private Set<User> users;
 	
 	public Long getId() {
