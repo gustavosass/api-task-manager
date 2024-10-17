@@ -7,6 +7,7 @@ classDiagram
         +String name
         +String email
         +String password
+        +List~Role~ roles;
          +createUser(user: User): void
         +updateUser(user: User): void
         +deleteUser(userId: int): void
@@ -43,8 +44,9 @@ classDiagram
     class Priority {
         <<enumeration>>
         LOW
-        MEDIUM
+        NORMAL
         HIGH
+        URGENT
     }
 
     class Status {
@@ -54,8 +56,15 @@ classDiagram
         COMPLETED
     }
 
+    class Role {
+        <<enumeration>>
+        USER
+        ADMIN
+    }
+
     User "N" --o "N" Task
     Category "1" --o "N" Task
     Task "1" --> "1" Priority
     Task "1" --> "1" Status
+    User "1" --> "N" Role
 ```
