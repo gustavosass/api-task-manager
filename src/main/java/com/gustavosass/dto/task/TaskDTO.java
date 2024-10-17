@@ -6,6 +6,7 @@ import java.util.Set;
 import com.gustavosass.dto.task.category.CategoryDTO;
 import com.gustavosass.dto.user.UserDTO;
 import com.gustavosass.enums.Priority;
+import com.gustavosass.enums.StatusTask;
 
 public class TaskDTO {
 
@@ -16,11 +17,13 @@ public class TaskDTO {
 	private Set<UserDTO> users;
 	private CategoryDTO category;
 	private Priority priority;
-	
+	private StatusTask status;
+
 	public TaskDTO() {
 	}
 
-	public TaskDTO(long id, String title, String description, Date dueDate, Set<UserDTO> users, CategoryDTO category, Priority priority) {
+	public TaskDTO(long id, String title, String description, Date dueDate, Set<UserDTO> users, CategoryDTO category,
+			Priority priority, StatusTask status) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -28,6 +31,7 @@ public class TaskDTO {
 		this.users = users;
 		this.category = category;
 		this.priority = priority;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -85,5 +89,15 @@ public class TaskDTO {
 	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
+
+	public StatusTask getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusTask status) {
+		this.status = status;
+	}
 	
+	
+
 }

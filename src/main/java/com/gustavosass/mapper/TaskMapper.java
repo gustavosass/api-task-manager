@@ -12,19 +12,20 @@ import com.gustavosass.dto.task.TaskDTO;
 import com.gustavosass.dto.task.category.CategoryDTO;
 import com.gustavosass.dto.user.UserDTO;
 import com.gustavosass.enums.Priority;
+import com.gustavosass.enums.StatusTask;
 import com.gustavosass.model.Category;
 import com.gustavosass.model.Task;
 import com.gustavosass.model.User;
 
 @Component
 public class TaskMapper {
-	
+
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	@Autowired
 	private CategoryMapper categoryMapper;
-	
+
 	public TaskDTO toDto(Task task) {
 		Long id = task.getId();
 		String title = task.getTitle();
@@ -33,9 +34,10 @@ public class TaskMapper {
 		Set<UserDTO> users = task.getUsers().stream().map(userMapper::toDto).collect(Collectors.toSet());
 		CategoryDTO category = categoryMapper.toDto(task.getCategory());
 		Priority priority = task.getPriority();
-		return new TaskDTO(id, title, description, dueDate, users, category, priority);
+		StatusTask status = task.getStatus();
+		return new TaskDTO(id, title, description, dueDate, users, category, priority, status);
 	}
-	
+
 	public Task toTask(CreateTaskDTO taskCreateDTO) {
 		String title = taskCreateDTO.getTitle();
 		String description = taskCreateDTO.getDescription();
@@ -43,9 +45,11 @@ public class TaskMapper {
 		Set<User> users = taskCreateDTO.getUsers().stream().map(userMapper::toUser).collect(Collectors.toSet());
 		Category category = categoryMapper.toCategory(taskCreateDTO.getCategory());
 		Priority priority = taskCreateDTO.getPriority();
-		return new Task(title, description, dueDate, users, category, priority);
+		StatusTask status = taskCreateDTO.getStatus();
+
+		return new Task(title, description, dueDate, users, category, priority, status);
 	}
-	
+
 	public Task toTask(TaskDTO taskDto) {
 		Long id = taskDto.getId();
 		String title = taskDto.getTitle();
@@ -54,6 +58,7 @@ public class TaskMapper {
 		Set<User> users = taskDto.getUsers().stream().map(userMapper::toUser).collect(Collectors.toSet());
 		Category category = categoryMapper.toCategory(taskDto.getCategory());
 		Priority priority = taskDto.getPriority();
-		return new Task(id, title, description, dueDate, users, category, priority);
+		StatusTask status = taskDto.getStatus();
+		return new Task(id, title, description, dueDate, users, category, priority, status);
 	}
 }

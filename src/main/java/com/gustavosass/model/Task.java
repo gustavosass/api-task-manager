@@ -6,6 +6,7 @@ import java.util.Set;
 import org.hibernate.annotations.Cascade;
 
 import com.gustavosass.enums.Priority;
+import com.gustavosass.enums.StatusTask;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -38,21 +39,24 @@ public class Task {
 	private Category category;
     @Enumerated(EnumType.STRING)
 	private Priority priority;
+    @Enumerated(EnumType.STRING)
+	private StatusTask status;
 
 	public Task() {
 	}
 
-	public Task(String title, String description, Date dueDate, Set<User> users, Category category, Priority priority) {
+	public Task(String title, String description, Date dueDate, Set<User> users, Category category, Priority priority, StatusTask status) {
 		this.title = title;
 		this.description = description;
 		this.dueDate = dueDate;
 		this.users = users;
 		this.category = category;
 		this.priority = priority;
+		this.status = status;
 	}
 
 	public Task(Long id, String title, String description, Date dueDate, Set<User> users, Category category,
-			Priority priority) {
+			Priority priority, StatusTask status) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -60,6 +64,7 @@ public class Task {
 		this.users = users;
 		this.category = category;
 		this.priority = priority;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -118,4 +123,12 @@ public class Task {
 		this.priority = priority;
 	}
 
+	public StatusTask getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusTask status) {
+		this.status = status;
+	}
+	
 }
