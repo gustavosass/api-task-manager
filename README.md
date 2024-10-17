@@ -1,4 +1,30 @@
-# api-task-manager
+
+# Desafio - Claro - Java com Spring Boot
+
+Criação de uma API Rest para gerenciamento de tarefas.
+
+
+## 🚀 Principais Tecnologias
+- **Java 17**
+- **Spring Boot 3**
+- **Spring Data JPA**
+- **OpenAPI (Swagger)**
+- **PostgreSQL**
+- **Railway**
+
+
+## Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente.
+
+- `SPRING_PROFILES_ACTIVE` **'HML' ou 'PROD'**
+- `PGHOST`
+- `PGPORT`
+- `PGDATABASE`
+- `PGUSER`
+- `PGPASSWORD`
+
+# Diagrama
 
 ```mermaid
 classDiagram
@@ -68,3 +94,4 @@ classDiagram
     Task "1" --> "1" Status
     User "1" --> "N" Role
 ```
+
