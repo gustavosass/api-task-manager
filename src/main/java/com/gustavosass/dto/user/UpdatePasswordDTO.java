@@ -1,8 +1,12 @@
-package com.gustavosass.dto;
+package com.gustavosass.dto.user;
+
+import jakarta.validation.constraints.NotBlank;
 
 public class UpdatePasswordDTO {
 	
+	@NotBlank
 	private String password;
+	@NotBlank
 	private String newPassword;
 	
 	public String getPassword() {

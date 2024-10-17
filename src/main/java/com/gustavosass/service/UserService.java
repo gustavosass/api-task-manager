@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.gustavosass.dto.UpdatePasswordDTO;
+import com.gustavosass.dto.user.UpdatePasswordDTO;
 import com.gustavosass.model.User;
 
 @Service
-public interface UserService {
+public interface UserService{
 		
 	List<User> findAll();
 	
@@ -17,6 +17,8 @@ public interface UserService {
 	User findById(Long id);
 	
 	User findByDocument(Long document);
+	
+	User findByUsername(String username);
 	
 	User create(User user);
 	

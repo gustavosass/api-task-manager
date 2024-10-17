@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gustavosass.dto.TaskCreateDTO;
-import com.gustavosass.dto.TaskDTO;
+import com.gustavosass.dto.task.CreateTaskDTO;
+import com.gustavosass.dto.task.TaskDTO;
 import com.gustavosass.mapper.TaskMapper;
 import com.gustavosass.model.Task;
 import com.gustavosass.service.impl.TaskServiceImpl;
 
 @RestController
-@RequestMapping("/task")
+@RequestMapping("/api/task")
 public class TaskController {
 	
 	@Autowired
@@ -49,7 +49,7 @@ public class TaskController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TaskDTO> create(@RequestBody TaskCreateDTO taskCreateDto){
+	public ResponseEntity<TaskDTO> create(@RequestBody CreateTaskDTO taskCreateDto){
 		Task task = taskMapper.toTask(taskCreateDto);
 		Task taskCreated = taskServiceImpl.create(task);
 		TaskDTO taskDto = taskMapper.toDto(taskCreated);

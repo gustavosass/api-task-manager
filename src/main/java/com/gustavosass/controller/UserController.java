@@ -14,15 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gustavosass.dto.UpdatePasswordDTO;
-import com.gustavosass.dto.UserCreateDTO;
-import com.gustavosass.dto.UserDTO;
+import com.gustavosass.dto.user.CreateUserDTO;
+import com.gustavosass.dto.user.UpdatePasswordDTO;
+import com.gustavosass.dto.user.UserDTO;
 import com.gustavosass.mapper.UserMapper;
 import com.gustavosass.model.User;
 import com.gustavosass.service.impl.UserServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 	
 	@Autowired
@@ -50,7 +52,7 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserDTO> create(@RequestBody UserCreateDTO userCreateDTO){
+	public ResponseEntity<UserDTO> create(@RequestBody @Valid CreateUserDTO userCreateDTO){
 		User user = userMapper.toUser(userCreateDTO);
 		User userCreated = userServiceImpl.create(user);
 		UserDTO userDto = userMapper.toDto(userCreated);
@@ -58,7 +60,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDto){
+	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody @Valid UserDTO userDto){
 		User user = userMapper.toUser(userDto);
 		User userUpdated = userServiceImpl.update(id, user);
 		UserDTO updatedUserDto = userMapper.toDto(userUpdated);
@@ -76,4 +78,5 @@ public class UserController {
 		UserDTO userDto = userMapper.toDto(userServiceImpl.updatePassword(id, updatePasswordDto));
 		return ResponseEntity.ok(userDto);
 	}
+	
 }

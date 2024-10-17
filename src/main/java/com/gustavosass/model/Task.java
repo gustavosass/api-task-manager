@@ -3,16 +3,29 @@ package com.gustavosass.model;
 import java.util.Date;
 import java.util.Set;
 
+import org.hibernate.annotations.Cascade;
+
+import com.gustavosass.enums.Priority;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity(name = "tb_task")
 public class Task {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -21,52 +34,88 @@ public class Task {
 	private Date dueDate;
 	@ManyToMany(cascade = CascadeType.DETACH)
 	private Set<User> users;
-	
-	public Task() {}
+	@ManyToOne(cascade = CascadeType.DETACH)
+	private Category category;
+    @Enumerated(EnumType.STRING)
+	private Priority priority;
 
-	public Task(String title, String description, Date dueDate, Set<User> users) {
+	public Task() {
+	}
+
+	public Task(String title, String description, Date dueDate, Set<User> users, Category category, Priority priority) {
 		this.title = title;
 		this.description = description;
 		this.dueDate = dueDate;
 		this.users = users;
+		this.category = category;
+		this.priority = priority;
 	}
-	
-	public Task(Long id, String title, String description, Date dueDate, Set<User> users) {
+
+	public Task(Long id, String title, String description, Date dueDate, Set<User> users, Category category,
+			Priority priority) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.dueDate = dueDate;
 		this.users = users;
+		this.category = category;
+		this.priority = priority;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Date getDueDate() {
 		return dueDate;
 	}
+
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
+
 	public Set<User> getUsers() {
 		return users;
 	}
+
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Priority getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Priority priority) {
+		this.priority = priority;
+	}
+
 }

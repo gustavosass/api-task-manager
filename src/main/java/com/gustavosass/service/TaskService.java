@@ -8,7 +8,7 @@ import com.gustavosass.model.Task;
 
 @Service
 public interface TaskService {
-	
+		
 	List<Task> findTasksByUserId(Long id);
 	
 	List<Task> findAll();
