@@ -94,4 +94,6 @@ classDiagram
     Task "1" --> "1" Status
     User "1" --> "N" Role
 ```
+![image](https://github.com/user-attachments/assets/9199d7c4-0035-4208-85ad-5b25dd9f4d78)
+![image](https://github.com/user-attachments/assets/b545b22f-fbf6-4744-90d0-0680170f3145)
 
